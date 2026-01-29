@@ -1,0 +1,29 @@
+
+
+<h1>Starknet Nodes</h1>
+
+<form method="post" action="{% url 'deploy_node' %}">
+  {% csrf_token %}
+  <button>Deploy Node</button>
+</form>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>RPC</th>
+  </tr>
+  {% for node in nodes %}
+  <tr>
+    <td>{{ node.name }}</td>
+    <td>{{ node.status }}</td>
+    <td>
+      {% if node.status == "running" %}
+        <code>{{ node.rpc_url }}</code>
+      {% else %}
+        —
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>

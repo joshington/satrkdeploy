@@ -1,0 +1,18 @@
+
+version: "3.8"
+
+services:
+  pathfinder:
+      image: eqlabs/pathfinder:latest
+      container_name: pathfinder_${RPC_PORT}
+      restart: unless-stopped
+      ports:
+        - "${RPC_PORT}:9545"
+      volumes:
+        - pathfinder_data_${RPC_PORT}:/usr/share/pathfinder/data
+      command:
+        - "--network=sepolia"
+      environment:
+        - TZ=Etc/UTC
+volumes:
+  pathfinder_data_${RPC_PORT}:
