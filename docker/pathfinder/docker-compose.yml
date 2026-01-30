@@ -9,11 +9,14 @@ services:
       ports:
         - "${RPC_PORT}:9545"
       command:
-        - --network=sepolia
+        - --network=sepolia-testnet
         - --http-rpc=0.0.0.0:9545
+        - --ethereum.url=https://sepolia.infura.io/v3/bc4f5bea09f146119ff341fea27d9362
       volumes:
         - pathfinder_data:/data
       environment:
         - TZ=Etc/UTC
+        - NETWORK=sepolia-testnet
+        - ETHEREUM_URL=https://sepolia.infura.io/v3/bc4f5bea09f146119ff341fea27d9362
 volumes:
   pathfinder_data:
