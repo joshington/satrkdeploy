@@ -1,7 +1,9 @@
 import requests
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render, redirect
+
+from django.shortcuts import render,redirect, get_object_or_404
+from .services.docker import destroy_pathfinder
 from .models import StarknetNode
 from .tasks import deploy_node_task
 import random 
@@ -38,4 +40,19 @@ def deploy_node(request):
     )
 
     deploy_node_task.delay(node.id)
-    return redirect("dashboard")
+    return redirect("nodes:dashboard")
+
+
+
+def destroy_node(request, node_id):
+    if request.method == "POST":
+        node = get_object_or_404(StarknetNode, id=node_id)
+
+        try:
+            destroy_pathfinder(node.rpc_port)
+        except Exception:
+            pass  # PoC: ignore infra errors
+
+        node.delete()
+
+    return redirect("nodes:dashboard")

@@ -1,5 +1,5 @@
 
-version: "3.8"
+#version: "3.8"
 
 services:
   pathfinder:
@@ -8,11 +8,12 @@ services:
       restart: unless-stopped
       ports:
         - "${RPC_PORT}:9545"
-      volumes:
-        - pathfinder_data_${RPC_PORT}:/usr/share/pathfinder/data
       command:
-        - "--network=sepolia"
+        - --network=sepolia
+        - --http-rpc=0.0.0.0:9545
+      volumes:
+        - pathfinder_data:/data
       environment:
         - TZ=Etc/UTC
 volumes:
-  pathfinder_data_${RPC_PORT}:
+  pathfinder_data:
