@@ -56,3 +56,7 @@ def destroy_node(request, node_id):
         node.delete()
 
     return redirect("nodes:dashboard")
+
+#====index view===
+def index(request):
+    return render(request, "nodes/index.html")

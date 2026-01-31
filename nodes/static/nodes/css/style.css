@@ -1,0 +1,161 @@
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  color: #111;
+  background: #f9fafb;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.hero {
+  background: linear-gradient(120deg, #1b1f3b, #0a0f2c);
+  color: white;
+  padding-bottom: 100px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 60px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 80px auto 0;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 52px;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: #8b5cf6;
+}
+
+.hero p {
+  font-size: 18px;
+  opacity: 0.85;
+}
+
+.hero-buttons {
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 14px 26px;
+  border-radius: 6px;
+  margin: 10px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.primary {
+  background: #8b5cf6;
+  color: white;
+}
+
+.secondary {
+  border: 1px solid white;
+}
+
+.section {
+  padding: 80px 60px;
+  text-align: center;
+}
+
+.section.dark {
+  background: #111827;
+  color: white;
+}
+
+.network-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.network-card {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.network-card.primary {
+  border: 2px solid #8b5cf6;
+}
+
+.network-card.disabled {
+  opacity: 0.5;
+}
+
+.badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #8b5cf6;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.badge.coming {
+  background: #6b7280;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.step {
+  max-width: 220px;
+}
+
+.step span {
+  font-size: 32px;
+  color: #8b5cf6;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.footer {
+  background: #0a0f2c;
+  color: #9ca3af;
+  text-align: center;
+  padding: 30px;
+}

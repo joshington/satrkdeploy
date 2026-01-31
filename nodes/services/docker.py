@@ -3,7 +3,7 @@ import subprocess
 import os 
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parents[3]
+BASE_DIR = Path(__file__).resolve().parents[2]
 PATHFINDER_DIR = BASE_DIR / "docker" / "pathfinder"
 
 def deploy_pathfinder(rpc_port: int):
@@ -17,10 +17,12 @@ def deploy_pathfinder(rpc_port: int):
         env=env,
         capture_output=True, text=True,
         check=True
-
     )
     if result.returncode != 0:
-        raise RuntimeError(result.stderr)
+        raise RuntimeError(
+            f"Docker compose failed:\nSTDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"
+        )
+
     return True 
 
 def destroy_pathfinder(rpc_port: int):
