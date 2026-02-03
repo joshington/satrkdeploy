@@ -1,5 +1,6 @@
 
 import subprocess
+import time
 import os 
 from pathlib import Path
 
@@ -36,3 +37,27 @@ def destroy_pathfinder(rpc_port: int):
         env=env,
         check=True
     )
+
+    return True
+
+#poll docker health from celery task instead of hitting RPC immediately
+def wait_for_container(container_name: str, timeout: int = 180):
+    start_time = time.time()
+    #while True:
+        #result = subprocess.run(
+        #    ["docker", "inspect", "--format='{{.State.Health.Status}}'", container_name],
+        #    capture_output=True, text=True
+        #)
+        #status = result.stdout.strip().strip("'")
+        #if status == "healthy":
+        #    return True
+        #elif time.time() - start_time > timeout:
+        #    raise TimeoutError(f"Container {container_name} did not become healthy in time.")
+        #time.sleep(5)
+    while time.time() - start_time < timeout:
+        status = subprocess.check_output(
+            ["docker", "inspect", "--format='{{.State.Health.Status}}'", container_name]
+        ).decode().strip()
+        if status == "healthy": return True
+        time.sleep(5)
+    raise Exception(f"Container {container_name} did not become healthy in time.")

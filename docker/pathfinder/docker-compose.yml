@@ -20,3 +20,9 @@ services:
         - ETHEREUM_URL=https://sepolia.infura.io/v3/bc4f5bea09f146119ff341fea27d9362
 volumes:
   pathfinder_data:
+
+healthcheck:
+    test: ["CMD", "curl", "-f", "http://localhost:9545/"]
+    interval: 10s
+    timeout: 3s
+    retries: 12

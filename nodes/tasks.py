@@ -5,11 +5,16 @@ from .services.docker import deploy_pathfinder
 import time 
 import requests
 
-@shared_task(bind=True)
+@shared_task(
+    bind=True,autoretry_for=(Exception,), 
+    retry_backoff=10, retry_kwargs={"max_retries":12}
+)
 def deploy_node_task(self, node_id):
     node = StarknetNode.objects.get(id=node_id)
     node.status = "deploying"
     node.save()
+
+    #rpc_url = f"http://127.0.0.1:{node.rpc_port}"
 
     try:
         deploy_pathfinder(node.rpc_port)
@@ -25,7 +30,7 @@ def deploy_node_task(self, node_id):
                         "params": [],
                         "id": 1,
                     },
-                    timeout=2
+                    timeout=3,
                 )
                 if r.status_code == 200:
                     node.status = "running"
